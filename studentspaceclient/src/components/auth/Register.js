@@ -1,9 +1,38 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {Link} from 'react-router-dom';
 import avatar from '../../images/registerIcons/avatar.png';
 import blackVector from '../../images/registerIcons/blackvector.png'
 import logo from '../../images/registerIcons/logo.png';
 function Register() {
+//Hooks for taking input
+const [formData,setFormData]=useState(
+  {
+    name:'',
+    email:'',
+    password:'',
+    password2:''
+  }
+);
+
+//destructring the data
+const{name,email,password,password2}=formData  ;
+
+//onChnage handler to add value to setFormdata
+const onChange=e=>setFormData({...formData,[e.target.name]:e.target.value})
+
+//onSubmit handler to submit the form data
+const onSubmit=e=>{
+  e.preventDefault();
+  if(password !==password2){
+      console.log('error');
+  }
+  else
+  {
+   console.log(formData) 
+  }
+}
+
+
     return (
         <section>
         <img
@@ -18,7 +47,7 @@ function Register() {
         className="hidden lg:block w-1/2 hover:scale-150 transition-all duration-500 transform mx-auto"/>
 
 
-          <form className="flex flex-col justify-center items-center w-1/2">
+          <form onSubmit={e=>onSubmit(e)} className="flex flex-col justify-center items-center w-1/2">
             <img src={avatar} className="w-32" />
             <h2
               className="my-8 font-display font-bold text-3xl text-gray-700 text-center">
@@ -28,13 +57,32 @@ function Register() {
               <i className="fa fa-user absolute text-primarycolor text-xl"></i>
               <input
                 type="text"
+                name="email"
+                value={email}
                 placeholder="enter email-Id"
+                onChange={e=>onChange(e)}
+                required
+                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
+            </div>
+            <div className="relative mt-8">
+              <i className="fa fa-lock absolute text-primarycolor text-xl"></i>
+              <input
+                type="text"
+                name="name"
+                value={name}
+                onChange={e=>onChange(e)}
+                required
+                placeholder="Enter your Name"
                 className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
             </div>
             <div className="relative mt-8">
               <i className="fa fa-lock absolute text-primarycolor text-xl"></i>
               <input
                 type="password"
+                name="password"
+                value={password}
+                onChange={e=>onChange(e)}
+                required
                 placeholder="Enter a password"
                 className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
             </div>
@@ -42,16 +90,17 @@ function Register() {
               <i className="fa fa-lock absolute text-primarycolor text-xl"></i>
               <input
                 type="password"
+                name="password2"
+                value={password2}
+                onChange={e=>onChange(e)}
+                required
                 placeholder="Enter password again"
                 className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
             </div>
-            <Link to="#" className="self-end mt-4 text-gray-600 font-bold"
+            <input type="submit" className="inline-flex rounded-full text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"/>
+            <Link to="/login" className="self-end mt-4 text-gray-600 font-bold"
               >Have an account?</Link>
-            {/* <Link
-              to="#"
-              className="py-3 px-20 bg-grey-500 rounded-full text-white font-bold uppercase text-lg mt-4 transform hover:translate-y-1 transition-all duration-500"
-              >Login</Link> */}
-              <Link to='/dashboard' className="inline-flex rounded-full text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Register</Link>
+              
           </form>
           </div>
           </section>
