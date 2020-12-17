@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import Logo from '../../images/logo.jpg'
+import Logo from '../../images/landingIcons/logo.jpg'
 import {Link} from 'react-router-dom';
 
 function Landing(props) {
