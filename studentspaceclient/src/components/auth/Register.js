@@ -51,7 +51,7 @@ function Register() {
               to="#"
               className="py-3 px-20 bg-grey-500 rounded-full text-white font-bold uppercase text-lg mt-4 transform hover:translate-y-1 transition-all duration-500"
               >Login</Link> */}
-              <Link to='/login' className="inline-flex rounded-full text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Register</Link>
+              <Link to='/dashboard' className="inline-flex rounded-full text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Register</Link>
           </form>
           </div>
           </section>

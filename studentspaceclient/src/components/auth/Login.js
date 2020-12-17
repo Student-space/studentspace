@@ -31,7 +31,7 @@ function Login() {
               <i className="fa fa-user absolute text-primarycolor text-xl"></i>
               <input
                 type="text"
-                placeholder="username"
+                placeholder="email"
                 className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
             </div>
             <div className="relative mt-8">
@@ -47,7 +47,7 @@ function Login() {
               to="#"
               className="py-3 px-20 bg-grey-500 rounded-full text-white font-bold uppercase text-lg mt-4 transform hover:translate-y-1 transition-all duration-500"
               >Login</Link> */}
-              <Link to='/login' className="inline-flex rounded-full text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Login</Link>
+              <Link to='/dashboard' className="inline-flex rounded-full text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Login</Link>
           </form>
           </div>
           </section>
