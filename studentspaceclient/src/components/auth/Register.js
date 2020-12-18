@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types'
 
 //importing alerts
 import {setAlert} from '../../actions/alert';
@@ -14,7 +15,7 @@ import logo from '../../images/registerIcons/logo.png';
 
 
 
-const Register=() => {
+const Register=({setAlert}) => {
 //Hooks for taking input
 const [formData,setFormData]=useState(
   {
@@ -35,7 +36,7 @@ const onChange=e=>setFormData({...formData,[e.target.name]:e.target.value})
 const onSubmit=e=>{
   e.preventDefault();
   if(password !==password2){
-      console.log('error');
+      setAlert('Password dont match','danger');
   }
   else
   {
@@ -118,5 +119,8 @@ const onSubmit=e=>{
     )
 }
 
+Register.propTypes={
+  setAlert:PropTypes.func.isRequired
+}
 
 export default connect(null,{setAlert})(Register);

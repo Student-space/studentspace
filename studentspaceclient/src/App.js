@@ -19,6 +19,7 @@ import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
+import Alert from './components/layout/Alert';
 
 
 //redux
@@ -42,14 +43,22 @@ function App() {
         {/* Landin page component */}
         <Route exact path="/" component={Landing}/>
 
+        {/* alert component */}
+        <Alert/>
+
         {/* switch */}
         <Switch>
         {/* register page route */}
           <Route exact path="/register" component={Register}/>
+          
           {/* login page route */}
           <Route exact path ="/login" component={Login}/>
+          
           {/* dashboard route */}
           <Route exact path ="/dashboard" component={Dashboard}/>
+        
+        
+        
         </Switch>
       </Fragment>
     </Router>
