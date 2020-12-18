@@ -5,6 +5,7 @@ const dotenv = require('dotenv')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const connectDB = require('./config/db')
+const multer = require('multer');
 // Load config
 dotenv.config({ path: './config/.env' })
 const app = express()
@@ -25,6 +26,8 @@ app.use(
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+
+
 // Routers
 app.use('/users',require('./routes/UserRouter'));
 
