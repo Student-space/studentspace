@@ -1,3 +1,4 @@
+
 //importing packages
 import React,{Fragment} from 'react';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
@@ -6,6 +7,7 @@ import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
 
 
 //importing styles
+
 import './App.css';
 import './styles/index.css';
 
@@ -27,7 +29,10 @@ import store from './store';
 //main functional component
 function App() {
   return (
+
     <Provider store={store}>
+
+
     <Router>
       <Fragment>
 
@@ -48,7 +53,9 @@ function App() {
         </Switch>
       </Fragment>
     </Router>
+
     </Provider>
+
   );
 }
 
