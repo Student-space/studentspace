@@ -5,7 +5,7 @@ import {Link } from 'react-router-dom';
 function Navbar() {
     return (
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-      <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+      <Link to="/" className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
         <svg width="70" height="65" viewBox="0 0 45 65" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M28.8045 60.3065C35.3975 60.3065 40.7421 55.2528 40.7421 49.0188C40.7421 42.7847 35.3975 37.731 28.8045 37.731C22.2116 37.731 16.8669 42.7847 16.8669 49.0188C16.8669 55.2528 22.2116 60.3065 28.8045 60.3065Z" fill="#3F3D56" />
           <path d="M42.2809 57.1553L41.8564 59.2247L44.6153 59.601L46.4192 58.6603L46.3131 57.1553H42.2809Z" fill="#575A89" />
@@ -28,7 +28,7 @@ function Navbar() {
           <path d="M36.0732 33.2158L37.2433 31.626L37.9833 34.2505L36.0732 35.003V33.2158Z" fill="#575A89" />
         </svg>
         <span className="ml-3 text-xl">Student Space</span>
-      </a>
+      </Link>
       <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
         <Link to='/developers' className="mr-5 hover:text-gray-900">Developers</Link>
         <Link to='/contact-us' className="mr-5 hover:text-gray-900">Contact Us</Link>

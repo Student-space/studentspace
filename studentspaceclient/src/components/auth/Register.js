@@ -1,9 +1,20 @@
 import React,{useState} from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+
+//importing alerts
+import {setAlert} from '../../actions/alert';
+
+//importing logo
 import avatar from '../../images/registerIcons/avatar.png';
 import blackVector from '../../images/registerIcons/blackvector.png'
 import logo from '../../images/registerIcons/logo.png';
-function Register() {
+
+
+
+
+
+const Register=() => {
 //Hooks for taking input
 const [formData,setFormData]=useState(
   {
@@ -108,4 +119,4 @@ const onSubmit=e=>{
 }
 
 
-export default Register
+export default connect(null,{setAlert})(Register);
