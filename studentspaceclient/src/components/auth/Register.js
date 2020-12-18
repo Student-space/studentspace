@@ -3,8 +3,9 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
 
-//importing alerts
+//importing actions
 import {setAlert} from '../../actions/alert';
+import {register} from '../../actions/auth';
 
 //importing logo
 import avatar from '../../images/registerIcons/avatar.png';
@@ -15,7 +16,7 @@ import logo from '../../images/registerIcons/logo.png';
 
 
 
-const Register=({setAlert}) => {
+const Register=({setAlert,register}) => {
 //Hooks for taking input
 const [formData,setFormData]=useState(
   {
@@ -40,7 +41,7 @@ const onSubmit=e=>{
   }
   else
   {
-   console.log(formData) 
+   register({name,email,password});
   }
 }
 
@@ -73,7 +74,7 @@ const onSubmit=e=>{
                 value={email}
                 placeholder="enter email-Id"
                 onChange={e=>onChange(e)}
-                required
+               required
                 className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
             </div>
             <div className="relative mt-8">
@@ -83,7 +84,7 @@ const onSubmit=e=>{
                 name="name"
                 value={name}
                 onChange={e=>onChange(e)}
-                required
+               required
                 placeholder="Enter your Name"
                 className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
             </div>
@@ -94,7 +95,7 @@ const onSubmit=e=>{
                 name="password"
                 value={password}
                 onChange={e=>onChange(e)}
-                required
+               required
                 placeholder="Enter a password"
                 className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
             </div>
@@ -105,7 +106,7 @@ const onSubmit=e=>{
                 name="password2"
                 value={password2}
                 onChange={e=>onChange(e)}
-                required
+               required
                 placeholder="Enter password again"
                 className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
             </div>
@@ -120,7 +121,8 @@ const onSubmit=e=>{
 }
 
 Register.propTypes={
-  setAlert:PropTypes.func.isRequired
+  setAlert:PropTypes.func.isRequired,
+  register:PropTypes.func.isRequired
 }
 
-export default connect(null,{setAlert})(Register);
+export default connect(null,{setAlert,register})(Register);
