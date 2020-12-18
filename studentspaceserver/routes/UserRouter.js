@@ -3,9 +3,23 @@ const bcrypt = require('bcryptjs');
 const User=require('../models/UserModel');
 const auth=require('../middleware/auth');
 const jwt = require("jsonwebtoken");
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
+const sharp = require('sharp')
+
+const avatar = multer({
+    limits:{
+        fileSize:1000000,
+    },
+    fileFilter(req,file,cb){
+        if(!file.originalname.match(/\.(jpg|png|JPG|PNG|JPEG|jpeg)$/))
+        return cb(new Error('This is not a correct format of the file'))
+        cb(undefined,true)
+    }
+})
 
 
-let refreshTokens=[]
 /*
   Author:Sahil Naik
   Date:15/12/2020
@@ -246,5 +260,21 @@ router.post('/', auth,async (req, res, next) => {
   });
 });
 
+router.post('/avatar',auth,avatar.single('avatar'),async (req,res) =>{
+  const user = await User.findById(req.user);
+   user.avatar =req.file.buffer
+   await user.save();
+   res.json({
+     userName: user.userName,
+     id: user._id,
+     email:user.email,
+     firstName:user.firstName,
+     lastName:user.lastName,
+     semester:user.semester,
+     branch:user.branch,
+     CreatedAt:user.CreatedAt,
+     avatar:user.avatar
+   });
+},(err,req,res,next) => res.status(404).send({error:err}));
 
 module.exports=router;

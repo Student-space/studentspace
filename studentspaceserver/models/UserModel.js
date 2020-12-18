@@ -38,9 +38,15 @@ const UserSchema=new mongoose.Schema({
     required:true,
     minlength:5
   },
+  avatar:{
+      type:Buffer
+  },
   CreatedAt:{
    type:Date,
    default:Date.now
  }
-});
+},{
+  timestamps:true
+}
+);
 module.exports=mongoose.model('User',UserSchema);
