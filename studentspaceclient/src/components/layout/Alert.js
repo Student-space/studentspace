@@ -14,10 +14,15 @@ alerts.length>0
 
 //map throught each alert and dispaly the alert based on classname of alertType
 && alerts.map(alert=>(
-    <div key={alert.id} className={`alert alert-${alert.alertType}`}>
-        {alert.msg}
+    <div key={alert.id} className="px-4 py-3 leading-normal text-red-100 bg-red-700 rounded-lg" role="alert">
+        <p>{alert.msg}</p>
     </div>
 ))
+
+
+
+
+
  
 //proptypes
 Alert.propTypes = {
@@ -29,6 +34,6 @@ const mapStateToProps=state=>({
 alerts:state.alert
 })
 
-
+//exporting
 export default connect(mapStateToProps)( Alert);
 
