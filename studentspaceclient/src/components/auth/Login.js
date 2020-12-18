@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment ,useState} from 'react'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom';
 import loginWaveIcon from '../../images/loginIcons/blackvector.png';
@@ -6,6 +6,24 @@ import char from '../../images/loginIcons/char.png';
 import avatar from '../../images/loginIcons/avatar.png';
 
 function Login() {
+
+  //use state hook
+  const [formData,setFormData]=useState(
+    {
+      email:'',
+      password:''
+     
+    }
+  );
+  
+  //destructring the data
+  const{email,password}=formData  ;
+  
+  //onChnage handler to add value to setFormdata
+  const onChange=e=>setFormData({...formData,[e.target.name]:e.target.value})
+  
+  //onSubmit handler to submit the form data
+  
     return (
         
         <section>
@@ -32,6 +50,10 @@ function Login() {
               <input
                 type="text"
                 placeholder="email"
+                name="email"
+                value={email}
+                onChange={e=>onChange(e)}
+                required
                 className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
             </div>
             <div className="relative mt-8">
@@ -39,6 +61,10 @@ function Login() {
               <input
                 type="password"
                 placeholder="password"
+                name="password"
+                value={password}
+                onChange={e=>onChange(e)}
+                required
                 className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
             </div>
             <Link to="#" className="self-end mt-4 text-gray-600 font-bold"

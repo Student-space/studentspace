@@ -19,9 +19,15 @@ import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 
 
+//redux
+import {Provider} from 'react-redux';
+import store from './store';
+
+
 //main functional component
 function App() {
   return (
+    <Provider store={store}>
     <Router>
       <Fragment>
 
@@ -42,6 +48,7 @@ function App() {
         </Switch>
       </Fragment>
     </Router>
+    </Provider>
   );
 }
 
