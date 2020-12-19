@@ -1,7 +1,9 @@
 import { func } from 'prop-types';
 import{
 REGISTER_SUCCESS,
-REGISTER_FAIL
+REGISTER_FAIL,
+USER_LOADED,
+AUTH_ERROR
 
 } from '../actions/types';
 
@@ -30,6 +32,7 @@ export default function(state=initalState,action)
           }
 
           case REGISTER_FAIL:
+            case AUTH_ERROR:
               localStorage.removeItem('token');
             return{
                 ...state,
@@ -37,6 +40,17 @@ export default function(state=initalState,action)
                 isAuthenticated:false,
                 loading:false
             }
+            
+           case USER_LOADED:
+               return{
+                ...state,
+                isAuthenticated:true,
+                loading:false,
+                user:payload
+
+               }
+            
+               
           default:
           return state;
     }

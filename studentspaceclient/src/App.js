@@ -1,13 +1,12 @@
 
 //importing packages
-import React,{Fragment} from 'react';
+import React,{Fragment,useEffect, useState} from 'react';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
 
 
 
 
 //importing styles
-
 import './App.css';
 import './styles/index.css';
 
@@ -26,9 +25,23 @@ import Alert from './components/layout/Alert';
 import {Provider} from 'react-redux';
 import store from './store';
 
+//importing other functions
+import {loadUser} from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
+
+
+if(localStorage.token){
+  setAuthToken(localStorage.token);
+
+}
 
 //main functional component
-function App() {
+const App=()=> {
+
+  useEffect(()=>{
+    store.dispatch(loadUser());
+  },[]);
+
   return (
 
     <Provider store={store}>
