@@ -28,11 +28,11 @@ const avatar = multer({
 */
 router.post('/signup',async(req,res,next)=>{
 
-  const {email,password,passwordCheck,firstName,lastName,userName,semester,branch,CreatedAt}=req.body;
+  var {email,password,passwordCheck,firstName,lastName,userName,CreatedAt,semester,branch}=req.body;
 
   try {
 
-      if(!email|| !password || !passwordCheck ||!firstName || !lastName || !semester || !branch){
+      if(!email|| !password || !passwordCheck ||!firstName || !lastName ){
 
         return res
         .status(400)
@@ -54,7 +54,7 @@ router.post('/signup',async(req,res,next)=>{
 
       }
 
-      if(!userName){
+      if(userName===""){
         userName=email;
       }
 
@@ -95,7 +95,7 @@ router.post('/signup',async(req,res,next)=>{
 
   }
   catch (err) {
-    return res.status(500).json({error:err});
+    return res.status(500).json({error:err.message});
   }
 
 });//End of signup route
@@ -260,7 +260,7 @@ router.post('/', auth,async (req, res, next) => {
   });
 });
 
-router.post('/avatar',auth,avatar.single('avatar'),async (req,res) =>{
+router.post('/profileImage',auth,avatar.single('avatar'),async (req,res) =>{
   const user = await User.findById(req.user);
    user.avatar =req.file.buffer
    await user.save();
