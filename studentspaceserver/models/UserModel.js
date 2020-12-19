@@ -7,18 +7,6 @@ const UserSchema=new mongoose.Schema({
       required:true,
       unique:true
   },
-  semester:{
-    type:Number,
-    required:true,
-    validate : {
-      validator : Number.isInteger,
-      message   : '{VALUE} is not an integer value'
-}
-  },
-  branch:{
-      type:String,
-      required:true
-  },
   firstName:{
     type:String,
     required:true
@@ -30,8 +18,7 @@ const UserSchema=new mongoose.Schema({
   },
   userName:{
     type:String,
-    max :20,
-
+    required:true
   },
   password:{
     type:String,

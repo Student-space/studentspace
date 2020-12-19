@@ -1,11 +1,17 @@
 import React, { Fragment ,useState} from 'react'
 import PropTypes from 'prop-types'
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
+
+//importing logos
 import loginWaveIcon from '../../images/loginIcons/blackvector.png';
 import char from '../../images/loginIcons/char.png';
 import avatar from '../../images/loginIcons/avatar.png';
 
-function Login() {
+//importing functions from actions
+import {userLogin} from '../../actions/auth';
+
+const Login=({userLogin,isAuthenticated})=> {
 
   //use state hook
   const [formData,setFormData]=useState(
@@ -23,7 +29,19 @@ function Login() {
   const onChange=e=>setFormData({...formData,[e.target.name]:e.target.value})
   
   //onSubmit handler to submit the form data
+   const onSubmit=async(e)=>{
+      e.preventDefault();
+   
+         userLogin(email,password);
   
+}
+  
+
+//redirect if logged in
+if(isAuthenticated)
+{
+  return <Redirect to="/dashboard"/>
+}
     return (
         
         <section>
@@ -39,7 +57,7 @@ function Login() {
         class="hidden lg:block w-1/2 hover:scale-150 transition-all duration-500 transform mx-auto"/>
 
 
-          <form className="flex flex-col justify-center items-center w-1/2">
+          <form className="flex flex-col justify-center items-center w-1/2 onSubmit={e => onSubmit(e)}" >
             <img src={avatar} className="w-32" />
             <h2
               className="my-8 font-display font-bold text-3xl text-gray-700 text-center">
@@ -84,7 +102,13 @@ function Login() {
     )
 }
 
+Login.propTypes={
+  userLogin:PropTypes.func.isRequired,
+  isAuthenticated:PropTypes.bool
+}
+const mapStateToProps=state=>({
+  isAuthenticated:state.auth.isAuthenticated
+});
 
-
-export default Login
+export default connect(mapStateToProps,{userLogin})(Login);
 

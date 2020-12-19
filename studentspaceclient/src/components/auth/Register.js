@@ -1,11 +1,11 @@
 import React,{useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link,Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
 
 //importing actions
 import {setAlert} from '../../actions/alert';
-import {register} from '../../actions/auth';
+import {userRegister} from '../../actions/auth';
 
 //importing logo
 import avatar from '../../images/registerIcons/avatar.png';
@@ -16,7 +16,7 @@ import logo from '../../images/registerIcons/logo.png';
 
 
 
-const Register=({setAlert,register}) => {
+const Register=({setAlert,userRegister,isAuthenticated}) => {
 //Hooks for taking input
 const [formData,setFormData]=useState(
   {
@@ -41,8 +41,13 @@ const onSubmit=e=>{
   }
   else
   {
-   register({name,email,password});
+   userRegister({name,email,password});
   }
+};
+if(isAuthenticated)
+{
+  <Redirect to='/user/signin'/>
+  setAlert('Login with the registered credentials','danger');
 }
 
 
@@ -122,7 +127,13 @@ const onSubmit=e=>{
 
 Register.propTypes={
   setAlert:PropTypes.func.isRequired,
-  register:PropTypes.func.isRequired
+  register:PropTypes.func.isRequired,
+  isAuthenticated:PropTypes.bool
 }
 
-export default connect(null,{setAlert,register})(Register);
+
+const mapStateToProps=state=>({
+  isAuthenticated:state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps,{setAlert,userRegister})(Register);

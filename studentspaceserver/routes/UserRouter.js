@@ -7,6 +7,7 @@ const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp')
+const usernameGenerator=require('username-generator');
 
 const avatar = multer({
     limits:{
@@ -28,11 +29,12 @@ const avatar = multer({
 */
 router.post('/signup',async(req,res,next)=>{
 
-  const {email,password,passwordCheck,firstName,lastName,userName,semester,branch,CreatedAt}=req.body;
+  const {firstName,lastName,email,password}=req.body;
+
 
   try {
 
-      if(!email|| !password || !passwordCheck ||!firstName || !lastName || !semester || !branch){
+      if(!email|| !password || !firstName || !lastName){
 
         return res
         .status(400)
@@ -46,17 +48,6 @@ router.post('/signup',async(req,res,next)=>{
         .json({msg:"Please Enter Password of length More than 5"});
 
       }
-      if(password!==passwordCheck){
-
-        return res
-        .status(400)
-        .json({ msg: "Enter the same password twice for verification." });
-
-      }
-
-      if(!userName){
-        userName=email;
-      }
 
       const existingUser=await User.findOne({email:email});
 
@@ -66,12 +57,8 @@ router.post('/signup',async(req,res,next)=>{
       .json({msg:"User With this email already exits"});
 
       }
-      if(userName>40){
-      return  res
-      .status(400)
-      .json({msg:"Please Enter Username of length below 40"});
-
-      }
+      const userName=usernameGenerator.generateUsername();
+      
       // bcrypt Password with a String
 
       const salt = await bcrypt.genSalt();
@@ -82,10 +69,9 @@ router.post('/signup',async(req,res,next)=>{
         password:passwordHash,
         firstName,
         lastName,
-        userName,
-        semester,
-        branch,
-        CreatedAt
+        userName
+        
+       
     });
     // Values Stored to Database
 
@@ -95,6 +81,7 @@ router.post('/signup',async(req,res,next)=>{
 
   }
   catch (err) {
+    console.error(err.message)
     return res.status(500).json({error:err});
   }
 
@@ -139,11 +126,8 @@ router.post('/signin', async (req,res)=>{
 
       const refreshTokens =jwt.sign({id:user._id},process.env.JWT_SECRET);
       res.json({
-      refreshTokens,
-        user:{
-          id:user._id,
-          userName:user.userName
-        }
+      refreshTokens
+       
       });
 
   }
