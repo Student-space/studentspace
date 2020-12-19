@@ -9,7 +9,6 @@ const UserSchema=new mongoose.Schema({
   },
   semester:{
     type:Number,
-    required:true,
     validate : {
       validator : Number.isInteger,
       message   : '{VALUE} is not an integer value'
@@ -17,7 +16,6 @@ const UserSchema=new mongoose.Schema({
   },
   branch:{
       type:String,
-      required:true
   },
   firstName:{
     type:String,
@@ -45,8 +43,6 @@ const UserSchema=new mongoose.Schema({
    type:Date,
    default:Date.now
  }
-},{
-  timestamps:true
 }
 );
 module.exports=mongoose.model('User',UserSchema);
