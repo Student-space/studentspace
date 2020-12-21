@@ -26,7 +26,7 @@ import {Provider} from 'react-redux';
 import store from './store';
 
 //importing other functions
-import {loadUser} from './actions/auth';
+// import {loadUser} from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 
 
@@ -38,9 +38,9 @@ if(localStorage.token){
 //main functional component
 const App=()=> {
 
-  useEffect(()=>{
-    store.dispatch(loadUser());
-  },[]);
+  // useEffect(()=>{
+  //   store.dispatch(loadUser());
+  // },[]);
 
   return (
 

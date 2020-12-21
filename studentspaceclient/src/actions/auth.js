@@ -12,26 +12,26 @@ import{
 import setAuthToken from '../utils/setAuthToken'
 
 //load user
-export const loadUser=()=>async dispatch=>{
-    if(localStorage.token){
-        setAuthToken(localStorage.token);
+// export const loadUser=()=>async dispatch=>{
+//     if(localStorage.token){
+//         setAuthToken(localStorage.token);
 
-    }
+//     }
     
-    try {
-        const res=await axios.get('route')
+//     try {
+//         const res=await axios.get('./users/check')
     
-        dispatch({
-            type:USER_LOADED,
-            payload:res.data
-        });
+//         dispatch({
+//             type:USER_LOADED,
+//             payload:res.data
+//         });
     
-    } catch (error) {
-        dispatch({
-            type:AUTH_ERROR
-        });
-    }
-}
+//     } catch (error) {
+//         dispatch({
+//             type:AUTH_ERROR
+//         });
+//     }
+// }
 
 
 
@@ -45,12 +45,12 @@ export const userRegister=({name,email,password})=>async dispatch=>{
     const body=JSON.stringify({name,email,password}); 
 
     try {
-        const res= await axios.post('/users/signin',body,config)
+        const res= await axios.post('http://localhost:5000/users/signin',body,config)
         dispatch({
             type:REGISTER_SUCCESS,
             payload:res.data
         });
-        dispatch(loadUser());
+        // dispatch(loadUser());
     } catch (error) {
         const errors=error.response.data.errors;
         if(errors)
@@ -79,13 +79,13 @@ export const userLogin=(email,password)=>async dispatch=>{
             type:LOGIN_SUCCESS,
             payload:res.data
         });
-        dispatch(loadUser());
+        // dispatch(loadUser());
     } catch (error) {
-        const errors=error.response.data.errors;
-        if(errors)
-        {
-            errors.forEach(err=>dispatch(setAlert(err.msg,'danger')));
-        }
+        // const errors=error.response.data.errors;
+        // if(errors)
+        // {
+        //     errors.forEach(err=>dispatch(setAlert(err.msg,'danger')));
+        // }
         dispatch({
             type:LOGIN_FAIL
         });   
