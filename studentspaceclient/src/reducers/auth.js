@@ -5,7 +5,8 @@ REGISTER_FAIL,
 USER_LOADED,
 AUTH_ERROR,
 LOGIN_FAIL,
-LOGIN_SUCCESS
+LOGIN_SUCCESS,
+LOGOUT
 
 } from '../actions/types';
 
@@ -13,7 +14,7 @@ LOGIN_SUCCESS
 
 const initalState={
     token:localStorage.getItem('token'),
-    isAuthenticated:null,
+    isAuthenticated:false,
     loading:true,
     user:null
 }
@@ -31,7 +32,8 @@ export default function(state=initalState,action)
           }
           
        case LOGIN_SUCCESS:
-          localStorage.setItem('token',payload.token);
+         
+          localStorage.setItem('token',payload.refreshTokens);
           return{
               ...state,
               payload,
@@ -43,6 +45,7 @@ export default function(state=initalState,action)
           case REGISTER_FAIL:
             case AUTH_ERROR:
             case LOGIN_FAIL:
+            case LOGOUT:
               localStorage.removeItem('token');
             return{
                 ...state,

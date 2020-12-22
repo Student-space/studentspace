@@ -6,32 +6,34 @@ import{
     USER_LOADED,
     AUTH_ERROR,
     LOGIN_SUCCESS,
-    LOGIN_FAIL
+    LOGIN_FAIL,
+    LOGOUT
+
     
 } from './types';
 import setAuthToken from '../utils/setAuthToken'
 
 //load user
-// export const loadUser=()=>async dispatch=>{
-//     if(localStorage.token){
-//         setAuthToken(localStorage.token);
+export const loadUser=()=>async dispatch=>{
+    if(localStorage.token){
+        setAuthToken(localStorage.token);
 
-//     }
+    }
     
-//     try {
-//         const res=await axios.get('./users/check')
+    try {
+        const res=await axios.get('./users/')
     
-//         dispatch({
-//             type:USER_LOADED,
-//             payload:res.data
-//         });
+        dispatch({
+            type:USER_LOADED,
+            payload:res.data
+        });
     
-//     } catch (error) {
-//         dispatch({
-//             type:AUTH_ERROR
-//         });
-//     }
-// }
+    } catch (error) {
+        dispatch({
+            type:AUTH_ERROR
+        });
+    }
+}
 
 
 
@@ -79,7 +81,7 @@ export const userLogin=(email,password)=>async dispatch=>{
             type:LOGIN_SUCCESS,
             payload:res.data
         });
-        // dispatch(loadUser());
+        dispatch(loadUser());
     } catch (error) {
         // const errors=error.response.data.errors;
         // if(errors)
@@ -90,4 +92,10 @@ export const userLogin=(email,password)=>async dispatch=>{
             type:LOGIN_FAIL
         });   
     }
+}
+
+
+//user logout
+export const userLogout=()=>dispatch=>{
+    dispatch({type:LOGOUT})
 }

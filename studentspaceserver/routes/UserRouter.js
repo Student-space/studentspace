@@ -8,6 +8,7 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp')
 const usernameGenerator=require('username-generator');
+const UserModel = require('../models/UserModel');
 
 const avatar = multer({
     limits:{
@@ -137,6 +138,19 @@ router.post('/signin', async (req,res)=>{
 });//End of route signin
 
 
+
+
+//load user
+router.get('/', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    console.log(user);
+    res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
 /*
   Author:Sahil Naik
   Date:15/11/2020
