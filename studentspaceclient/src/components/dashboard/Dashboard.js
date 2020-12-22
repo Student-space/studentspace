@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom';
 import communityLogo from '../../images/dashboardicons/communityLogo.png';
 import libraryLogo from '../../images/dashboardicons/libraryLogo.png';
 import teamsLogo from '../../images/dashboardicons/teamsLogo.png';
@@ -28,7 +29,7 @@ function Dashboard(props) {
         <div className="bg-gray-100 p-6 rounded-lg">
           <img className="h-40 rounded w-full object-cover object-center mb-3" src={libraryLogo} alt="content" />
 
-          <h3 className="text-lg text-gray-900 font-medium title-font mb-1">Library</h3>
+          <Link to='/library' className="text-lg text-gray-900 font-medium title-font mb-1">Library</Link>
           <p className="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.</p>
         </div>
       </div>
