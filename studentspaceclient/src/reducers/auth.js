@@ -1,4 +1,4 @@
-import { func } from 'prop-types';
+
 import{
 REGISTER_SUCCESS,
 REGISTER_FAIL,
@@ -13,7 +13,7 @@ LOGOUT
 
 
 const initalState={
-    token:localStorage.getItem('token'),
+    refreshTokens:localStorage.getItem('token'),
     isAuthenticated:false,
     loading:true,
     user:null
@@ -27,16 +27,16 @@ export default function(state=initalState,action)
       case REGISTER_SUCCESS:
           return{
             ...state,
-            isAuthenticated:true,
+            isAuthenticated:false,
             loading:false
           }
           
        case LOGIN_SUCCESS:
-         
+        
           localStorage.setItem('token',payload.refreshTokens);
           return{
               ...state,
-              payload,
+              ...payload,
               isAuthenticated:true,
               loading:false
 
@@ -49,7 +49,7 @@ export default function(state=initalState,action)
               localStorage.removeItem('token');
             return{
                 ...state,
-                token:null,
+                refreshTokens:null,
                 isAuthenticated:false,
                 loading:false
             }

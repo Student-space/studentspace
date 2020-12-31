@@ -6,9 +6,12 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const connectDB = require('./config/db')
 const multer = require('multer');
+const cors=require('cors');
+
 // Load config
 dotenv.config({ path: './config/.env' })
 const app = express()
+app.use(cors());
 
 // Database Connection Method
 connectDB();

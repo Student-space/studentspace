@@ -16,11 +16,12 @@ import logo from '../../images/registerIcons/logo.png';
 
 
 
-const Register=({setAlert,userRegister,isAuthenticated}) => {
+const Register=({setAlert,userRegister,loading}) => {
 //Hooks for taking input
 const [formData,setFormData]=useState(
   {
-    name:'',
+    firstName:'',
+    lastName:'',
     email:'',
     password:'',
     password2:''
@@ -28,7 +29,7 @@ const [formData,setFormData]=useState(
 );
 
 //destructring the data
-const{name,email,password,password2}=formData  ;
+const{firstName,lastName,email,password,password2}=formData  ;
 
 //onChnage handler to add value to setFormdata
 const onChange=e=>setFormData({...formData,[e.target.name]:e.target.value})
@@ -40,14 +41,13 @@ const onSubmit=e=>{
       setAlert('Password dont match','danger');
   }
   else
-  {
-   userRegister({name,email,password});
+  { userRegister({firstName,lastName,email,password});
+   
   }
 };
-if(isAuthenticated)
+if(loading === false)
 {
-  <Redirect to='/user/signin'/>
-  setAlert('Login with the registered credentials','danger');
+  <Redirect to='https:5000/user/signin'/>
 }
 
 
@@ -80,18 +80,29 @@ if(isAuthenticated)
                 placeholder="enter email-Id"
                 onChange={e=>onChange(e)}
                required
-                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
+                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500  text-lg"/>
             </div>
             <div className="relative mt-8">
               <i className="fa fa-lock absolute text-primarycolor text-xl"></i>
               <input
                 type="text"
-                name="name"
-                value={name}
+                name="firstName"
+                value={firstName}
                 onChange={e=>onChange(e)}
                required
                 placeholder="Enter your Name"
-                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
+                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500  text-lg"/>
+            </div>
+            <div className="relative mt-8">
+              <i className="fa fa-lock absolute text-primarycolor text-xl"></i>
+              <input
+                type="text"
+                name="lastName"
+                value={lastName}
+                onChange={e=>onChange(e)}
+               required
+                placeholder="Enter your Name"
+                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500  text-lg"/>
             </div>
             <div className="relative mt-8">
               <i className="fa fa-lock absolute text-primarycolor text-xl"></i>
@@ -102,7 +113,7 @@ if(isAuthenticated)
                 onChange={e=>onChange(e)}
                required
                 placeholder="Enter a password"
-                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
+                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500  text-lg"/>
             </div>
             <div className="relative mt-8">
               <i className="fa fa-lock absolute text-primarycolor text-xl"></i>
@@ -113,7 +124,7 @@ if(isAuthenticated)
                 onChange={e=>onChange(e)}
                required
                 placeholder="Enter password again"
-                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
+                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500  text-lg"/>
             </div>
             <input type="submit" className="inline-flex rounded-full text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"/>
             <Link to="/login" className="self-end mt-4 text-gray-600 font-bold"
@@ -127,13 +138,13 @@ if(isAuthenticated)
 
 Register.propTypes={
   setAlert:PropTypes.func.isRequired,
-  register:PropTypes.func.isRequired,
-  isAuthenticated:PropTypes.bool
+  userRegister:PropTypes.func.isRequired,
+  loading:PropTypes.bool
 }
 
 
 const mapStateToProps=state=>({
-  isAuthenticated:state.auth.isAuthenticated
+  loading:state.auth.loading
 });
 
 export default connect(mapStateToProps,{setAlert,userRegister})(Register);
