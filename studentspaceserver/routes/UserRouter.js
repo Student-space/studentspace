@@ -137,20 +137,6 @@ router.post('/signin', async (req,res)=>{
   }
 });//End of route signin
 
-
-
-
-//load user
-router.get('/', auth, async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id).select('-password');
-    console.log(user);
-    res.json(user);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send('Server Error');
-  }
-});
 /*
   Author:Sahil Naik
   Date:15/11/2020
