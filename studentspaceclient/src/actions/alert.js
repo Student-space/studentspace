@@ -9,12 +9,12 @@ import {SET_ALERT,
 } from './types';
 
 //function to add and remove alert
-export const setAlert=(msg,timeout=3000)=>dispatch=>{
+export const setAlert=(msg,type,timeout=3000)=>dispatch=>{
 
     const id=uuidv4();
     dispatch({
         type:SET_ALERT,
-        payload:{msg,id}
+        payload:{msg,type,id}
     });
 
     //will remove alert from the screen after 3 seconds

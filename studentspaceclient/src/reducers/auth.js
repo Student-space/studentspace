@@ -51,7 +51,8 @@ export default function(state=initalState,action)
                 ...state,
                 refreshTokens:null,
                 isAuthenticated:false,
-                loading:false
+                loading:false,
+                user:null
             }
             
            case USER_LOADED:

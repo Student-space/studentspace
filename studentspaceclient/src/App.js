@@ -19,7 +19,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import Alert from './components/layout/Alert';
-import library from './components/library/Library';
+// import library from './components/library/Library';
 
 
 //redux
@@ -27,7 +27,7 @@ import {Provider} from 'react-redux';
 import store from './store';
 
 //importing other functions
-//  import {loadUser} from './actions/auth';
+ import {loadUser} from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 
 
@@ -40,9 +40,9 @@ if(localStorage.token){
 const App=()=> {
 
     
-  // useEffect(()=>{
-  //   store.dispatch(loadUser());
-  // },[]);
+  useEffect(()=>{
+    store.dispatch(loadUser());
+  },[]);
 
   return (
 

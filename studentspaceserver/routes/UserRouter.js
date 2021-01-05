@@ -9,6 +9,8 @@ const path = require('path');
 const sharp = require('sharp')
 const usernameGenerator=require('username-generator');
 const UserModel = require('../models/UserModel');
+const { check, validationResult } = require('express-validator');
+
 
 const avatar = multer({
     limits:{
@@ -22,31 +24,44 @@ const avatar = multer({
 })
 
 
+//load user by token
+router.get('/', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 /*
   Author:Sahil Naik
   Date:15/12/2020
   @desc Registration via email
   @router /users/signup
 */
-router.post('/signup',async(req,res,next)=>{
-
-  const {firstName,lastName,email,password}=req.body;
+router.post('/signup',
+check('firstName','First Name is required').not().isEmpty(),
+check('lastName','Last Name is required').not().isEmpty(),
+check('email','please include a valid email').isEmail(),
+check(`password`,`password is required`).exists(),
+async(req,res)=>{
+  const errors=validationResult(req);
+  if(!errors.isEmpty())
+    {
+      return res.status(400).json({errors:errors.array()});
+    }
+ 
 
 
   try {
-
-      if(!email|| !password || !firstName || !lastName){
-
-        return res
-        .status(400)
-        .json({msg:"Please Fill all the fields"});
-
-      }
+    const {firstName,lastName,email,password}=req.body;
       if(password.length<5){
 
         return res
         .status(400)
-        .json({msg:"Please Enter Password of length More than 5"});
+        .json({ errors: [{ msg: `enter password of more than 5 characters` }] });
 
       }
 
@@ -55,7 +70,7 @@ router.post('/signup',async(req,res,next)=>{
       if(existingUser){
       return   res
       .status(400)
-      .json({msg:"User With this email already exits"});
+      .json({ errors: [{ msg: ` user with this email already exists` }] });
 
       }
       const userName=usernameGenerator.generateUsername();
@@ -77,13 +92,11 @@ router.post('/signup',async(req,res,next)=>{
     // Values Stored to Database
 
     const savedUser=await newUser.save();
-
     res.json(savedUser);
-
   }
   catch (err) {
     console.error(err.message)
-    return res.status(500).json({error:err});
+    return res.status(500).json({ errors: [{ msg: ` server error` }] });
   }
 
 });//End of signup route
@@ -97,22 +110,24 @@ router.post('/signup',async(req,res,next)=>{
 */
 
 
-router.post('/signin', async (req,res)=>{
+router.post('/signin',
+  check('email','please include a valid email').isEmail(),
+  check(`password`,`password is required`).exists()
+  ,async (req,res)=>{
+    const errors=validationResult(req);
+    if(!errors.isEmpty())
+    {
+      return res.status(400).json({errors:errors.array()});
+    }
   try {
       const {email,password}=req.body;
 
-      if(!email || !password){
-        return res
-        .status(400)
-        .json({msg:"Please Fill all the fields"});
-
-      }
       const user=await User.findOne({email:email});
 
       if(!user){
         return res
         .status(400)
-        .json({msg:"No User Account Exists"});
+        .json({ errors: [{ msg: `no user exists` }] });
 
       }
 
@@ -120,12 +135,17 @@ router.post('/signin', async (req,res)=>{
       if(!isMatch){
         return res
         .status(400)
-        .json({msg:"Please Enter the correct password"});
+        .json({ errors: [{ msg: `enter the correct password` }] });
 
       }
+      const payload = {
+        user: {
+          id: user.id
+        }
+      };
       // It will produce the jwt secret token of the particular user
 
-      const refreshTokens =jwt.sign({id:user._id},process.env.JWT_SECRET);
+      const refreshTokens =jwt.sign(payload,process.env.JWT_SECRET);
       res.json({
       refreshTokens
        
@@ -133,7 +153,8 @@ router.post('/signin', async (req,res)=>{
 
   }
     catch (err) {
-    res.status(400).json({error:err.message});
+      console.error(err.message);
+    res.status(400).json({ errors: [{ msg: `server error` }] });
   }
 });//End of route signin
 

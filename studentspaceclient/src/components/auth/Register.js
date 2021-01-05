@@ -16,7 +16,7 @@ import logo from '../../images/registerIcons/logo.png';
 
 
 
-const Register=({setAlert,userRegister,loading}) => {
+const Register=({setAlert,userRegister}) => {
 //Hooks for taking input
 const [formData,setFormData]=useState(
   {
@@ -38,19 +38,13 @@ const onChange=e=>setFormData({...formData,[e.target.name]:e.target.value})
 const onSubmit=e=>{
   e.preventDefault();
   if(password !==password2){
-      setAlert('Password dont match','danger');
+      setAlert('Password dont match','fail');
   }
   else
   { userRegister({firstName,lastName,email,password});
    
   }
 };
-if(loading === false)
-{
-  <Redirect to='https:5000/user/signin'/>
-}
-
-
     return (
         <section>
         <img
