@@ -19,6 +19,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import Alert from './components/layout/Alert';
+import PrivateRoute from './components/routing/PrivateRoute';
 // import library from './components/library/Library';
 
 
@@ -70,7 +71,7 @@ const App=()=> {
           <Route exact path ="/login" component={Login}/>
           
           {/* dashboard route */}
-          <Route exact path ="/dashboard" component={Dashboard}/>
+          <PrivateRoute exact path ="/dashboard" component={Dashboard}/>
         
         
         
