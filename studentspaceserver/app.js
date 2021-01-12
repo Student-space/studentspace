@@ -38,6 +38,7 @@ app.use(methodOverride('_method'));
 // Routers
 app.use('/users',require('./routes/UserRouter'));
 app.use(`/library`,require(`./routes/libraryRoutes`));
+app.use(`/community`,require(`./routes/postsRoutes`));
 
 // Port Number
 const PORT = process.env.PORT 

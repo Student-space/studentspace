@@ -78,10 +78,7 @@ router.get('/:id',auth, async(req,res)=>{
 
 
 
-//delete post
-// @route    DELETE api/posts/:id
-// @desc     Delete a post
-// @access   Private
+//delete post by id
 router.delete('/:id',auth, async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
@@ -180,7 +177,6 @@ try {
     const newComment={
         text:req.body.text,
         name:user.name,
-        avatar:user.avatar,
         user:req.user.id
     
     };
