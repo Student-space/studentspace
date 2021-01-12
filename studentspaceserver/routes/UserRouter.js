@@ -158,128 +158,13 @@ router.post('/signin',
   }
 });//End of route signin
 
-/*
-  Author:Sahil Naik
-  Date:15/11/2020
-  @desc Router To check user signedin or not to enter the homepage
-  @router users/profile
-*/
-
-router.get("/profile", auth, async (req, res) => {
-  const user = await User.findById(req.user);
-  res.json({
-    userName: user.userName,
-    id: user._id,
-    email:user.email,
-    firstName:user.firstName,
-    lastName:user.lastName,
-    semester:user.semester,
-    branch:user.branch,
-    CreatedAt:user.CreatedAt,
-  });
-});//End of Router me
 
 
 
 
-/*
-  Author:Sahil Naik
-  Date:15/11/2020
-  @desc Router To Logout From the webapp
-  @router users/signout
-*/
-
-// GET /logout
-router.delete('/logout', async(req, res) => {
- refreshTokens = refreshTokens.filter(token => token !== req.body.token)
-
- res.json({
-   Msg:"Logout Successfully"
- });
-})
-
-/*
-  Author:Sahil Naik
-  Date:16/11/2020
-  @desc Router To Delete User Accout From the webapp
-  @router users/deleteAccount
-*/
-
-router.delete('/deleteAccount',auth,async (req,res)=> {
-  try {
-    const deletedUser=await User.findByIdAndDelete(req.user);
-
-    res.json(deletedUser);
-  }   catch (err) {
-    res.status(400).json({error:err.message});
-  }
-})//End of Route /deleteAccount
 
 
-/*
-  Author:Sahil Naik
-  Date:16/11/2020
-  @desc Router To Check Whether the TOken Produced is Valid or Not User Accout From the webapp
-  @router users/deleteAccount
-*/
-
-router.post('/tokenIsValid',async(req,res)=>{
-    try {
-        const token =req.header('x-auth-token');
-        if(!token){
-          res.json(false);
-        }
-        const verified=jwt.verify(token,process.env.JWT_SECRET);
-        if(!verified){
-          return res.status(400).json(false);
-        }
-        const user=await User.findById(verified.id);
-        if(!user){
-          return res.json(false);
-        }
-        return res.json(true);
-    } catch (e) {
-        res.status(500).json({error:err.message});
-    }
-});//End of ROute tokenIsValid
 
 
-/*
-  Author:Sahil Naik
-  Date:16/11/2020
-  @desc Router To Update User Profile
-  @router users/updateUserProfile
-*/
-router.post('/', auth,async (req, res, next) => {
 
 
-  const { name, github, twitter, facebook } = req.body;
-  const _id = ObjectID(req.user._id);
-
-  users.updateOne({ _id }, { $set: { firstname } }, (err) => {
-    if (err) {
-      throw err;
-    }
-
-    res.redirect('/users');
-  });
-});
-
-router.post('/avatar',auth,avatar.single('avatar'),async (req,res) =>{
-  const user = await User.findById(req.user);
-   user.avatar =req.file.buffer
-   await user.save();
-   res.json({
-     userName: user.userName,
-     id: user._id,
-     email:user.email,
-     firstName:user.firstName,
-     lastName:user.lastName,
-     semester:user.semester,
-     branch:user.branch,
-     CreatedAt:user.CreatedAt,
-     avatar:user.avatar
-   });
-},(err,req,res,next) => res.status(404).send({error:err}));
-
-module.exports=router;
