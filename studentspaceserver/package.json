@@ -4,7 +4,8 @@
   "description": "Student Space-An e-portal for all academic information. Developed using MERN Stack. ",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "author": "Sahil Naik and Amol Telang",
   "license": "ISC",
@@ -12,15 +13,21 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "connect-mongo": "^3.2.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "express-validator": "^6.9.2",
     "fs": "0.0.1-security",
+    "gridfs-stream": "^1.1.1",
     "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
     "mongoose": "^5.11.7",
     "multer": "^1.4.2",
+    "multer-gridfs-storage": "^4.2.0",
     "nodemon": "^2.0.6",
     "path": "^0.12.7",
-    "sharp": "^0.26.3"
+    "sharp": "^0.26.3",
+    "username-generator": "^1.1.0"
   }
 }

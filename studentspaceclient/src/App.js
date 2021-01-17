@@ -1,13 +1,12 @@
 
 //importing packages
-import React,{Fragment} from 'react';
+import React,{Fragment,useEffect, useState} from 'react';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
 
 
 
 
 //importing styles
-
 import './App.css';
 import './styles/index.css';
 
@@ -19,20 +18,41 @@ import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
+import Alert from './components/layout/Alert';
+import PrivateRoute from './components/routing/PrivateRoute';
+// import library from './components/library/Library';
 
 
 //redux
 import {Provider} from 'react-redux';
 import store from './store';
 
+//importing other functions
+ import {loadUser} from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
+
+
+if(localStorage.token){
+  setAuthToken(localStorage.token);
+
+}
 
 //main functional component
-function App() {
+const App=()=> {
+
+    
+  useEffect(()=>{
+    store.dispatch(loadUser());
+  },[]);
+
   return (
 
+<<<<<<< HEAD
 
   
 
+=======
+>>>>>>> studentspaceclient
     <Provider store={store}>
 
 
@@ -45,17 +65,29 @@ function App() {
         {/* Landin page component */}
         <Route exact path="/" component={Landing}/>
 
+        {/* alert component */}
+        <Alert/>
+
         {/* switch */}
         <Switch>
         {/* register page route */}
           <Route exact path="/register" component={Register}/>
+          
           {/* login page route */}
           <Route exact path ="/login" component={Login}/>
+          
           {/* dashboard route */}
-          <Route exact path ="/dashboard" component={Dashboard}/>
+          <PrivateRoute exact path ="/dashboard" component={Dashboard}/>
+        
+        
+        
         </Switch>
       </Fragment>
     </Router>
+<<<<<<< HEAD
+=======
+
+>>>>>>> studentspaceclient
     </Provider>
 
   );

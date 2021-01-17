@@ -14,7 +14,7 @@ try {
     return res.status(400).json({msg:"Token Not Verified"});
   }
   console.log(verified);
-  req.user=verified.id;
+  req.user=verified.user;
   next();
 }
 catch (e) {

@@ -7,16 +7,7 @@ const UserSchema=new mongoose.Schema({
       required:true,
       unique:true
   },
-  semester:{
-    type:Number,
-    validate : {
-      validator : Number.isInteger,
-      message   : '{VALUE} is not an integer value'
-}
-  },
-  branch:{
-      type:String,
-  },
+
   firstName:{
     type:String,
     required:true
@@ -28,8 +19,7 @@ const UserSchema=new mongoose.Schema({
   },
   userName:{
     type:String,
-    max :20,
-
+    required:true
   },
   password:{
     type:String,
@@ -45,4 +35,4 @@ const UserSchema=new mongoose.Schema({
  }
 }
 );
-module.exports=mongoose.model('User',UserSchema);
+module.exports=User= mongoose.model('user',UserSchema);

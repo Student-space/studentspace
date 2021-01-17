@@ -1,13 +1,27 @@
 import React,{useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link,Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types'
+
+//importing actions
+import {setAlert} from '../../actions/alert';
+import {userRegister} from '../../actions/auth';
+
+//importing logo
 import avatar from '../../images/registerIcons/avatar.png';
 import blackVector from '../../images/registerIcons/blackvector.png'
 import logo from '../../images/registerIcons/logo.png';
-function Register() {
+
+
+
+
+
+const Register=({setAlert,userRegister}) => {
 //Hooks for taking input
 const [formData,setFormData]=useState(
   {
-    name:'',
+    firstName:'',
+    lastName:'',
     email:'',
     password:'',
     password2:''
@@ -15,7 +29,7 @@ const [formData,setFormData]=useState(
 );
 
 //destructring the data
-const{name,email,password,password2}=formData  ;
+const{firstName,lastName,email,password,password2}=formData  ;
 
 //onChnage handler to add value to setFormdata
 const onChange=e=>setFormData({...formData,[e.target.name]:e.target.value})
@@ -24,15 +38,13 @@ const onChange=e=>setFormData({...formData,[e.target.name]:e.target.value})
 const onSubmit=e=>{
   e.preventDefault();
   if(password !==password2){
-      console.log('error');
+      setAlert('Password dont match','fail');
   }
   else
-  {
-   console.log(formData) 
+  { userRegister({firstName,lastName,email,password});
+   
   }
-}
-
-
+};
     return (
         <section>
         <img
@@ -61,19 +73,30 @@ const onSubmit=e=>{
                 value={email}
                 placeholder="enter email-Id"
                 onChange={e=>onChange(e)}
-                required
-                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
+               required
+                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500  text-lg"/>
             </div>
             <div className="relative mt-8">
               <i className="fa fa-lock absolute text-primarycolor text-xl"></i>
               <input
                 type="text"
-                name="name"
-                value={name}
+                name="firstName"
+                value={firstName}
                 onChange={e=>onChange(e)}
-                required
+               required
                 placeholder="Enter your Name"
-                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
+                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500  text-lg"/>
+            </div>
+            <div className="relative mt-8">
+              <i className="fa fa-lock absolute text-primarycolor text-xl"></i>
+              <input
+                type="text"
+                name="lastName"
+                value={lastName}
+                onChange={e=>onChange(e)}
+               required
+                placeholder="Enter your Name"
+                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500  text-lg"/>
             </div>
             <div className="relative mt-8">
               <i className="fa fa-lock absolute text-primarycolor text-xl"></i>
@@ -82,9 +105,9 @@ const onSubmit=e=>{
                 name="password"
                 value={password}
                 onChange={e=>onChange(e)}
-                required
+               required
                 placeholder="Enter a password"
-                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
+                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500  text-lg"/>
             </div>
             <div className="relative mt-8">
               <i className="fa fa-lock absolute text-primarycolor text-xl"></i>
@@ -93,9 +116,9 @@ const onSubmit=e=>{
                 name="password2"
                 value={password2}
                 onChange={e=>onChange(e)}
-                required
+               required
                 placeholder="Enter password again"
-                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500 capitalize text-lg"/>
+                className="pl-8 border-b-2 font-display focus:outline-none focus:border-primarycolor transition-all duration-500  text-lg"/>
             </div>
             <input type="submit" className="inline-flex rounded-full text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"/>
             <Link to="/login" className="self-end mt-4 text-gray-600 font-bold"
@@ -107,5 +130,15 @@ const onSubmit=e=>{
     )
 }
 
+Register.propTypes={
+  setAlert:PropTypes.func.isRequired,
+  userRegister:PropTypes.func.isRequired,
+  loading:PropTypes.bool
+}
 
-export default Register
+
+const mapStateToProps=state=>({
+  loading:state.auth.loading
+});
+
+export default connect(mapStateToProps,{setAlert,userRegister})(Register);
