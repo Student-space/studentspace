@@ -42,7 +42,7 @@ const onSubmit=e=>{
   }
   else
   { userRegister({firstName,lastName,email,password});
-   
+
   }
 };
     return (
@@ -50,7 +50,7 @@ const onSubmit=e=>{
         <img
           src={blackVector}
           className="fixed hidden lg:block inset-0 h-full"/>
-          
+
           <div
       className="w-screen h-screen flex flex-col justify-center items-center lg:grid lg:grid-cols-2">
 
@@ -123,7 +123,7 @@ const onSubmit=e=>{
             <input type="submit" className="inline-flex rounded-full text-white bg-gray-900 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"/>
             <Link to="/login" className="self-end mt-4 text-gray-600 font-bold"
               >Have an account?</Link>
-              
+
           </form>
           </div>
           </section>

@@ -1,9 +1,9 @@
 const express=require('express');
 const router=express.Router();
-const auth = require('../../middleware/auth');
+const auth=require('../middleware/auth');
 const {check,validationResult} = require ('express-validator');
-const Post=require('../../models/PostModel');
-const User=require('../../models/UserModel');
+const Post=require('../models/PostModel');
+const User=require('../models/UserModel');
 
 
 //add posts for a specific user

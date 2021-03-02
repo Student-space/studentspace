@@ -20,6 +20,8 @@ import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import Alert from './components/layout/Alert';
 import PrivateRoute from './components/routing/PrivateRoute';
+import Library from './components/library/Library';
+import Events from './components/events/Events';
 // import library from './components/library/Library';
 
 
@@ -40,19 +42,13 @@ if(localStorage.token){
 //main functional component
 const App=()=> {
 
-    
+
   useEffect(()=>{
     store.dispatch(loadUser());
   },[]);
 
   return (
 
-<<<<<<< HEAD
-
-  
-
-=======
->>>>>>> studentspaceclient
     <Provider store={store}>
 
 
@@ -72,22 +68,19 @@ const App=()=> {
         <Switch>
         {/* register page route */}
           <Route exact path="/register" component={Register}/>
-          
+
           {/* login page route */}
           <Route exact path ="/login" component={Login}/>
-          
+
           {/* dashboard route */}
           <PrivateRoute exact path ="/dashboard" component={Dashboard}/>
-        
-        
-        
+          <PrivateRoute exact path="/library" component={Library}/>
+          <PrivateRoute exact path="/events" component={Events}/>
+
         </Switch>
       </Fragment>
     </Router>
-<<<<<<< HEAD
-=======
 
->>>>>>> studentspaceclient
     </Provider>
 
   );

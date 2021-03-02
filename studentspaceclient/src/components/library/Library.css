@@ -1,0 +1,14 @@
+.add{
+  float: right;
+  margin-top:7rem;
+  margin-right: 7rem;
+  font-size: 4em;
+  border-radius: 100px;
+
+}
+.searchicon{
+  margin-top: 2.8px;
+  margin-right: 1px;
+  float: left;
+
+}

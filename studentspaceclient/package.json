@@ -8,8 +8,9 @@
     "@testing-library/user-event": "^12.6.0",
     "autoprefixer": "^10.1.0",
     "axios": "^0.21.0",
+    "material-icons": "^0.5.3",
     "moment": "^2.29.1",
-    "postcss": "^8.2.1",
+    "postcss": "^8.2.6",
     "postcss-cli": "^8.3.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -21,8 +22,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "tailwindcss": "^2.0.2",
-    "uuid": "^8.3.2",
-    "web-vitals": "^0.2.4"
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "start": "npm run watch:css && react-scripts start",
@@ -49,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "web-vitals": "^0.2.4"
   }
 }
