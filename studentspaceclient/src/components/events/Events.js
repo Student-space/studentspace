@@ -4,35 +4,40 @@ import {connect} from 'react-redux';
 import Spinner from '../layout/Spinner';
 import EventItem from './EventItem';
 import EventForm from './EventForm';
-import { getEvents } from '../../actions/events';
+import { getEvents } from '../../actions/event';
+import wave from '../../images/profileIcons/Vector.png'
 
-const Events = ({getEvents,event1:{events,loading}}) => {
+const Events = ({getEvents,post:{posts,loading}}) => {
     useEffect(()=>{
          getEvents();
     },[getEvents]);
     return loading ? ( 
     <Spinner/>
     ):(
-           <Fragment>
-               <h1>textxtt</h1>
+          <>    
+          <img src={wave}  className="fixed hidden lg:block inset-0 h-full "/>
+          
                <EventForm/>
                
-               <div>
-                {events.map(event1=>(
+               <div class="pt-6 pb-12">
+               <div class="container w-50 lg:w-3/6 mx-auto flex flex-col">
+                {posts.map(post=>(
                     
-                    <EventItem key={event1._id} event1={event1}/>
+                    <EventItem key={post._id} post={post}/>
                 ))}
-               </div>
-           </Fragment>
+                </div></div>
+               
+                
+                </>
        );
 };
 
 Events.propTypes = {
 getEvents:PropTypes.func.isRequired,
-event1:PropTypes.object.isRequired
+post:PropTypes.object.isRequired
 }
 
 const mapStateToProps=state=>({
-event1:state.event1
+post:state.event
 })
 export default connect(mapStateToProps,{getEvents})(Events);

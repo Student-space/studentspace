@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
 import {searchFile} from '../../actions/library/searchFile';
 import File from './File';
+import wave from '../../images/profileIcons/Vector.png'
 
 const Home=({searchFile,searchCompleted})=> {
 
@@ -33,6 +34,7 @@ const Home=({searchFile,searchCompleted})=> {
     <div className='flex flex-wrap w-full mb-20 flex-col items-center text-center'>
       <h1 className='sm:text-5xl text-5xl font-medium title-font mb-1 text-gray-900'>Search Files</h1>
       <p className='lg:w-1/2 w-full leading-relaxed text-base'>This app lets you upload and download any type of file to a remote monogodb server.<strong>Note: Server running on free plan and cant use more than 500mb</strong>,Use the about search bar to search files uploaded previosuly or use the add button to add your own files.</p>
+      <img src={wave}  className="fixed hidden lg:block inset-0 h-full "/>
     </div>
 
 

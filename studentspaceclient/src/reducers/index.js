@@ -7,7 +7,7 @@ import alert from './alert';
 import  auth from './auth';
 import profile from './profile';
 import post from './post';
-import event1 from './event1';
+import event from './event';
 import addFile from './library/addFile';
 import  searchFile from './library/searchFile';
 import downloadFile from './library/downloadFile'
@@ -17,7 +17,7 @@ alert,
 auth,
 profile,
 post,
-event1,
+event,
 addFile,
 searchFile,
 downloadFile

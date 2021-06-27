@@ -27,8 +27,8 @@ const Dashboard=({getCurrentProfile,auth:{user},profile:{profile,loading}})=> {
       <div className="xl:w-1/4 md:w-1/2 p-4">
         <div className="bg-gray-100 p-6 rounded-lg">
           <img className="h-40 rounded w-full object-cover object-center mb-3" src={communityLogo} alt="content" />
-          <h3 className="text-lg text-gray-900 font-medium title-font mb-1">Community</h3>
-          <p className="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.</p>
+          <Link to='/community' className="text-lg text-gray-900 font-medium title-font mb-1">Community</Link>
+          <p className="leading-relaxed text-base">Asks Questions,Discuss Doubts,Share your knowledge with your community</p>
         </div>
       </div>
       <div className="xl:w-1/4 md:w-1/2 p-4">
@@ -36,7 +36,7 @@ const Dashboard=({getCurrentProfile,auth:{user},profile:{profile,loading}})=> {
           <img className="h-40 rounded w-full object-cover object-center mb-3" src={libraryLogo} alt="content" />
 
           <Link to='/library' className="text-lg text-gray-900 font-medium title-font mb-1">Library</Link>
-          <p className="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.</p>
+          <p className="leading-relaxed text-base">Share your notes with your friends in an easy way</p>
         </div>
       </div>
       <div className="xl:w-1/4 md:w-1/2 p-4">
@@ -44,15 +44,15 @@ const Dashboard=({getCurrentProfile,auth:{user},profile:{profile,loading}})=> {
           <img className="h-40 rounded w-full object-cover object-center mb-3" src={teamsLogo} alt="content" />
 
           <h3 className="text-lg text-gray-900 font-medium title-font mb-1">Teams</h3>
-          <p className="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.</p>
+          <p className="leading-relaxed text-base">Form Teams of people with similar intrests as you</p>
         </div>
       </div>
       <div className="xl:w-1/4 md:w-1/2 p-4">
         <div className="bg-gray-100 p-6 rounded-lg">
           <img className="h-40 rounded w-full object-cover object-center mb-3" src={eventsLogo} alt="content" />
 
-          <h3 className="text-lg text-gray-900 font-medium title-font mb-1">Events</h3>
-          <p className="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.</p>
+          <Link to='/events' className="text-lg text-gray-900 font-medium title-font mb-1">Events</Link>
+          <p className="leading-relaxed text-base">Share any limited time events you know of.</p>
         </div>
       </div>
       </div>

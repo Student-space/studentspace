@@ -7,8 +7,8 @@ import {
   } from '../actions/types';
   
   const initialState = {
-    events: [],
-    event1: null,
+    posts: [],
+    post: null,
     loading: true,
     error: {}
   };
@@ -26,13 +26,13 @@ import {
       case ADD_EVENT:
         return {
           ...state,
-          events: [payload, ...state.events],
+          posts: [payload, ...state.posts],
           loading: false
         };
       case DELETE_EVENT:
         return {
           ...state,
-          events: state.events.filter((event1) => event1._id !== payload),
+          posts: state.posts.filter((post) => post._id !== payload),
           loading: false
         };
       case EVENT_ERROR:

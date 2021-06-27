@@ -6,7 +6,6 @@ import PostItem from './PostItem';
 import PostForm from './PostForm';
 import { getPosts } from '../../actions/post';
 import wave from '../../images/profileIcons/Vector.png'
-
 const Posts = ({getPosts,post:{posts,loading}}) => {
     useEffect(()=>{
          getPosts();
@@ -16,7 +15,7 @@ const Posts = ({getPosts,post:{posts,loading}}) => {
     ):(
           <>    
           <img src={wave}  className="fixed hidden lg:block inset-0 h-full "/>
-          
+
                <PostForm/>
                
                <div class="pt-6 pb-12">

@@ -10,7 +10,7 @@ const PostItem = ({addLike,removeLike,deletePost,auth,post:{_id,text,user,name,t
       <div class="flex flex-col md:flex-row overflow-hidden bg-gray-200 rounded-lg shadow-xl  mt-4 w-50 mx-2">
      
       <div class="h-64 w-auto md:w-1/2">
-        <img class="inset-0 h-full w-full object-cover object-center" src={image||"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" }/>
+        <img class="inset-0 h-full w-full object-cover object-center" src={image||"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTncZN3g6YjgiysnD_pzNnmoKGNV3Ddnm3tMw&usqp=CAU" }/>
       </div>
      
       <div class="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">

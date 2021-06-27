@@ -8,7 +8,7 @@ import {
  
 } from './types';
 
-// Get posts
+// Get eventz
 export const getEvents = () => async dispatch => {
   try {
     const res = await axios.get('http://localhost:5000/events');
@@ -26,7 +26,7 @@ export const getEvents = () => async dispatch => {
 };
 
 
-// Delete post
+// Delete event
 export const deleteEvent = id => async dispatch => {
   try {
     await axios.delete(`http://localhost:5000/event/${id}`);
@@ -45,15 +45,16 @@ export const deleteEvent = id => async dispatch => {
   }
 };
 
-// Add post
-export const addEvent = formData => async dispatch => {
+// Add event
+export const addEvent = ({text,expiry,title}) => async dispatch => {
   const config={
     headers:{
         'Content-Type': 'application/json'
     }
 }
   try {
-    const res = await axios.post('http://localhost:5000/event', formData,config);
+    const body=JSON.stringify({text,expiry,title}); 
+    const res = await axios.post('http://localhost:5000/events', body,config);
 
     dispatch({
       type: ADD_EVENT,
