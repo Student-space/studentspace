@@ -9,8 +9,8 @@ const PostSchema = new mongoose.Schema({
       type:String,
       required:true
   },
-  name:{
-      type:String
+  image:{
+    type:String
   },
   likes:[
       {

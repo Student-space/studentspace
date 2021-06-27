@@ -12,16 +12,7 @@ const UserModel = require('../models/UserModel');
 const { check, validationResult } = require('express-validator');
 
 
-const avatar = multer({
-    limits:{
-        fileSize:1000000,
-    },
-    fileFilter(req,file,cb){
-        if(!file.originalname.match(/\.(jpg|png|JPG|PNG|JPEG|jpeg)$/))
-        return cb(new Error('This is not a correct format of the file'))
-        cb(undefined,true)
-    }
-})
+
 
 
 //load user by token
@@ -36,8 +27,6 @@ router.get('/', auth, async (req, res) => {
 });
 
 /*
-  Author:Sahil Naik
-  Date:15/12/2020
   @desc Registration via email
   @router /users/signup
 */
@@ -106,8 +95,6 @@ async(req,res)=>{
 
 
 /*
-  Author:Sahil Naik
-  Date:15/11/2020
   @desc Router For signin
   @router users/signin
 */
@@ -161,7 +148,7 @@ router.post('/signin',
   }
 });//End of route signin
 
-
+module.exports = router;
 
 
 
