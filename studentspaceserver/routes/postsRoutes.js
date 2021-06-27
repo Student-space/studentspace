@@ -1,9 +1,9 @@
 const express=require('express');
 const router=express.Router();
-const auth = require('../../middleware/auth');
+const auth = require('../middleware/auth');
 const {check,validationResult} = require ('express-validator');
-const Post=require('../../models/PostModel');
-const User=require('../../models/UserModel');
+const Post=require('../models/PostModel');
+const User=require('../models/UserModel');
 
 
 //add posts for a specific user
@@ -16,10 +16,11 @@ if(!errors.isEmpty()){
 }
 
 try {
+    const{image,text}=req.body;
     const user=await User.findById(req.user.id).select('-password');
     const newPost=new Post({
-        text:req.body.text,
-        name:user.name,
+        image,
+        text,
         user:req.user.id
     
     })

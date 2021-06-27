@@ -1,8 +1,13 @@
 import React from 'react'
 import Logo from '../../images/landingIcons/logo.jpg'
-import {Link} from 'react-router-dom';
+import {Link,Redirect} from 'react-router-dom';
+import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 
-function Landing() {
+const Landing=({isAuthenticated})=>{
+  if(isAuthenticated){
+   return <Redirect to='dashboard'/>
+  }
     return (
         
         <section className="text-gray-700 body-font">
@@ -22,7 +27,11 @@ function Landing() {
     )
 }
 
-
-
-export default Landing
+Landing.propTypes={
+  isAuthenticated:PropTypes.bool
+}
+const mapStateToProps=state=>({
+  isAuthenticated:state.auth.isAuthenticated
+})
+export default connect(mapStateToProps)(Landing);
 

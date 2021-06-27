@@ -12,16 +12,7 @@ const UserModel = require('../models/UserModel');
 const { check, validationResult } = require('express-validator');
 
 
-const avatar = multer({
-    limits:{
-        fileSize:1000000,
-    },
-    fileFilter(req,file,cb){
-        if(!file.originalname.match(/\.(jpg|png|JPG|PNG|JPEG|jpeg)$/))
-        return cb(new Error('This is not a correct format of the file'))
-        cb(undefined,true)
-    }
-})
+
 
 
 //load user by token
@@ -158,7 +149,7 @@ router.post('/signin',
   }
 });//End of route signin
 
-
+module.exports = router;
 
 
 

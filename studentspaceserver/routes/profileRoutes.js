@@ -1,11 +1,10 @@
 const express=require('express');
 const router=express.Router();
-const auth=require('../../middleware/auth');
-const Profile=require('../../models/ProfileModel');
-const User=require('../../models/UserModel');
+const auth=require('../middleware/auth');
+const Profile=require('../models/ProfleModel');
+const User=require('../models/UserModel');
 const {check,validationResult}=require('express-validator');
-const config=require('config');
-const request=require('request');
+
 
 
 //GET CURRENT USERS PROFILE
@@ -28,7 +27,7 @@ router.get('/me',auth,async(req,res)=>{
 
 
   //create or update profile
-router.post('/',[auth,[check('status','status is required').not().isEmpty(),
+router.post('/',[auth,[check('semester','semester is required').not().isEmpty(),
 check('skills','skills is required').not().isEmpty()]],async(req,res)=>{
 
 const errors=validationResult(req);
@@ -40,23 +39,18 @@ if(!errors.isEmpty()){
 
 // destructure the request
 const {
-    website,
-    location,
     bio,
     semester,
     skills,
-    youtube,
     twitter,
     instagram,
-    linkedin,
+    linkdin,
     facebook,
     
   } = req.body;
 
   const profileFeilds={};
   profileFeilds.user=req.user.id;
-  if(website)profileFeilds.website=website;
-  if(location)profileFeilds.location=location;
   if(bio)profileFeilds.bio=bio;
   if(semester)profileFeilds.semester=semester;
   if(skills){
@@ -66,11 +60,11 @@ const {
   }
 
 profileFeilds.social={}
-if(youtube)profileFeilds.social.youtube=youtube;
+
 if(twitter)profileFeilds.social.twitter=twitter;
 if(facebook)profileFeilds.social.facebook=facebook;
-if(linkedin)profileFeilds.social.linkedin=linkedin;
-if(instagram)profileFeilds.social.linkedin=linkedin;
+if(linkdin)profileFeilds.social.linkdin=linkdin;
+if(instagram)profileFeilds.social.instagram=instagram;
 
 
 try {
@@ -144,7 +138,7 @@ router.delete('/',auth,async(req,res)=>{
     }
 
 });
-
+module.exports = router;
 
 
 
