@@ -7,12 +7,12 @@ import { deleteComment } from '../../actions/post';
 
 const CommentItem = ({postId,comment:{_id,text,name,user,date},auth,deleteComment}) => {
     return (
-        <div class=" bg-white p-6  border-solid border-2 border-black max-w-sm flex-col items-center">
+        <div class=" md:flex-row overflow-hidden  rounded-lg shadow-xl  mt-4 w-50 mx-2 border-solid border-4 border-black">
         <div>
-        <h2 class="text-2xl font-bold mb-2 text-gray-800">{name}</h2>
+        <p class="text-gray-700"> Posted by {name}</p>
         </div>
-        <p class="text-gray-700">{text}</p>
-        <p class="text-gray-700">Posted on<Moment format='DD/MM/YYYY'>{date}</Moment></p>
+        <p class=" text-1xl font-bold mb-2 text-gray-800 "> {text}</p>
+        <p class="text-gray-700"> Posted on <Moment format='DD/MM/YYYY'>{date}</Moment></p>
         {!auth.loading && user ===auth.user._id && (
             <button onClick={e=>deleteComment(postId,_id)} class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
             <svg version="1.0" 

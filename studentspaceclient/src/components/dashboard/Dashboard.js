@@ -21,7 +21,7 @@ const Dashboard=({getCurrentProfile,auth:{user},profile:{profile,loading}})=> {
         <div className="h-1 w-40 bg-gray-900 rounded"></div>
       </div>
       <p className="lg:w-1/2 w-full leading-relaxed text-base"></p>
-      {profile!==null?<Fragment></Fragment>:<Fragment>please add your details to your  <Link to='/create-profile'> profile</Link></Fragment>}
+      {/* {profile!==null?<Fragment></Fragment>:<Fragment>please add your details to your  <Link to='/create-profile'> profile</Link></Fragment>} */}
     </div>
     <div className="flex flex-wrap -m-4">
       <div className="xl:w-1/4 md:w-1/2 p-4">

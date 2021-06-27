@@ -50,7 +50,7 @@ router.get('/',auth, async(req,res)=>{
 router.delete('/:id',auth, async (req, res) => {
     try {
       const event = await Event.findById(req.params.id);
-      //console.log(post);
+
   
       if (!event) {
         return res.status(404).json({ msg: 'Event not found' });

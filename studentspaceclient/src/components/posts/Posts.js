@@ -5,6 +5,7 @@ import Spinner from '../layout/Spinner';
 import PostItem from './PostItem';
 import PostForm from './PostForm';
 import { getPosts } from '../../actions/post';
+import wave from '../../images/profileIcons/Vector.png'
 
 const Posts = ({getPosts,post:{posts,loading}}) => {
     useEffect(()=>{
@@ -13,17 +14,21 @@ const Posts = ({getPosts,post:{posts,loading}}) => {
     return loading ? ( 
     <Spinner/>
     ):(
-           <Fragment>
-               <h1>textxtt</h1>
+          <>    
+          <img src={wave}  className="fixed hidden lg:block inset-0 h-full "/>
+          
                <PostForm/>
                
-               <div>
+               <div class="pt-6 pb-12">
+               <div class="container w-50 lg:w-3/6 mx-auto flex flex-col">
                 {posts.map(post=>(
                     
                     <PostItem key={post._id} post={post}/>
                 ))}
-               </div>
-           </Fragment>
+                </div></div>
+               
+                
+                </>
        );
 };
 

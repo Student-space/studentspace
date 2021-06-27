@@ -8,7 +8,8 @@ const User=require('../models/UserModel');
 
 //add posts for a specific user
 router.post('/',[auth,[
-    check('text','text is required').not().isEmpty()]
+    check('text','text is required').not().isEmpty(),
+    check('title','title is required').not().isEmpty()]
 ],async(req,res)=>{
     const errors=validationResult(req);
 if(!errors.isEmpty()){
@@ -16,11 +17,13 @@ if(!errors.isEmpty()){
 }
 
 try {
-    const{image,text}=req.body;
+    const{title,image,text}=req.body;
     const user=await User.findById(req.user.id).select('-password');
     const newPost=new Post({
+        title,
         image,
         text,
+        name:user.firstName,
         user:req.user.id
     
     })
@@ -177,7 +180,7 @@ try {
     const post=await Post.findById(req.params.id);
     const newComment={
         text:req.body.text,
-        name:user.name,
+        name:user.firstName,
         user:req.user.id
     
     };

@@ -32,7 +32,7 @@ const Profileform =({createProfile,history})  => {
     }=formData;
     return (
         <section>
-         <img src={wave}  className="fixed hidden lg:block inset-0 h-full"/>
+         <img src={wave}  className="fixed hidden lg:block inset-0 h-full "/>
          <div className="mx-auto container flex items-center" id="nav">
   <div className="w-full pt-2 p-4">
     <div className="mx-auto md:p-6 md:w-1/2">

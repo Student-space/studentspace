@@ -6,6 +6,7 @@ import PostItem from '../posts/PostItem';
 import CommentForm from './CommentForm';
 import CommentItem from './CommentItem';
 import { getPost } from '../../actions/post';
+import wave from '../../images/profileIcons/Vector.png'
 
 const Post = ({getPost,post:{post,loading},match}) => {
     useEffect(()=>{
@@ -13,11 +14,17 @@ const Post = ({getPost,post:{post,loading},match}) => {
     },[getPost]);
 
      return loading || post ===null ? <Spinner/>:<Fragment>
+         <img src={wave}  className="fixed hidden lg:block inset-0 h-full "/>
+         <CommentForm postId={post._id}/>
+         <div class="pt-6 pb-12">
+               <div class="container w-50 lg:w-3/6 mx-auto flex flex-col">
                  <PostItem post={post} showActions={false}/>
-                 <CommentForm postId={post._id}/>
+                 
                  {post.comments.map(comment=>(
                      <CommentItem key={comment._id} comment={comment} postId={post._id}/>
                  ))}
+                 </div>
+                 </div>
      </Fragment>
 }
 

@@ -82,14 +82,14 @@ export const deletePost = id => async dispatch => {
 };
 
 // Add post
-export const addPost = ({text,image}) => async dispatch => {
+export const addPost = ({text,image,title}) => async dispatch => {
   const config={
     headers:{
         'Content-Type': 'application/json'
     }
 }
 
-const body=JSON.stringify({text,image}); 
+const body=JSON.stringify({text,image,title}); 
 
   try {
     const res = await axios.post('http://localhost:5000/community', body,config);

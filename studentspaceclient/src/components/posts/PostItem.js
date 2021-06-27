@@ -5,23 +5,26 @@ import Moment from 'react-moment';
 import {connect} from 'react-redux';
 import { addLike,removeLike,deletePost} from '../../actions/post';
 
-const PostItem = ({addLike,removeLike,deletePost,auth,post:{_id,text,user,likes,comments,date,image},showActions}) => 
+const PostItem = ({addLike,removeLike,deletePost,auth,post:{_id,text,user,name,title,likes,comments,date,image},showActions}) => 
      (
-        <div className="p-10 flex flex-col h-screen my-auto items-center ">
-  <div className="max-w-sm rounded overflow-hidden shadow-lg">
-  <div className="font-bold text-xl mb-2">{user}</div>
-    <img className="w-full" className="lazy" src={image||"https://images.unsplash.com/photo-1565073182887-6bcefbe225b1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&w=1000&q=80"} alt="Mountain" />
-    <div className="px-6 py-4">
-      
-      <p className="text-gray-700 text-base">{text}</p>
-    </div>
-    <div className="px-6 pt-4 pb-2">
+      <div class="flex flex-col md:flex-row overflow-hidden bg-gray-200 rounded-lg shadow-xl  mt-4 w-50 mx-2">
+     
+      <div class="h-64 w-auto md:w-1/2">
+        <img class="inset-0 h-full w-full object-cover object-center" src={image||"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" }/>
+      </div>
+     
+      <div class="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
+        <h3 class="font-semibold text-lg leading-tight truncate">{title}</h3>
+        <p class="mt-2">
+        {text}
+        </p>
+      <span>
       {showActions && (
-        <Fragment>
-             <button onClick={e=>addLike(_id)} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
- <svg version="1.0" 
- width="16.000000pt" height="16.000000pt" viewBox="0 0 16.000000 16.000000"
- preserveAspectRatio="xMidYMid meet">
+      <Fragment>
+           <button onClick={e=>addLike(_id)} className="bg-white hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+<svg version="1.0" 
+width="16.000000pt" height="16.000000pt" viewBox="0 0 16.000000 16.000000"
+preserveAspectRatio="xMidYMid meet">
 
 <g transform="translate(0.000000,16.000000) scale(0.100000,-0.100000)"
 fill="#000000" stroke="none">
@@ -35,10 +38,10 @@ fill="#000000" stroke="none">
 
 </button>
 {'     '}  {'  '}
-<button onClick={e=>removeLike(_id)} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+<button onClick={e=>removeLike(_id)} className="bg-white hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
 <svg version="1.0"
- width="16.000000pt" height="16.000000pt" viewBox="0 0 16.000000 16.000000"
- preserveAspectRatio="xMidYMid meet">
+width="16.000000pt" height="16.000000pt" viewBox="0 0 16.000000 16.000000"
+preserveAspectRatio="xMidYMid meet">
 
 <g transform="translate(0.000000,16.000000) scale(0.100000,-0.100000)"
 fill="#000000" stroke="none">
@@ -50,10 +53,10 @@ fill="#000000" stroke="none">
 
 </button>
 {'     '}  {'  '}
-     <Link to={`/community/${_id}`} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
- <svg version="1.0"
- width="16.000000pt" height="16.000000pt" viewBox="0 0 16.000000 16.000000"
- preserveAspectRatio="xMidYMid meet">
+   <Link to={`/community/${_id}`} className="bg-white hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+<svg version="1.0"
+width="16.000000pt" height="16.000000pt" viewBox="0 0 16.000000 16.000000"
+preserveAspectRatio="xMidYMid meet">
 
 <g transform="translate(0.000000,16.000000) scale(0.100000,-0.100000)"
 fill="#000000" stroke="none">
@@ -63,15 +66,15 @@ fill="#000000" stroke="none">
 </g>
 </svg>
 {comments.length >0 && (<span>{comments.length}</span>)}
-  
+
 </Link>
 {' '}{''}
 {!auth.loading&&user===auth.user._id && (
-    
-    <button onClick={e=>deletePost(_id)} class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-    <svg version="1.0" 
- width="16.000000pt" height="16.000000pt" viewBox="0 0 16.000000 16.000000"
- preserveAspectRatio="xMidYMid meet">
+  
+  <button onClick={e=>deletePost(_id)} class="bg-white hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+  <svg version="1.0" 
+width="16.000000pt" height="16.000000pt" viewBox="0 0 16.000000 16.000000"
+preserveAspectRatio="xMidYMid meet">
 
 <g transform="translate(0.000000,16.000000) scale(0.100000,-0.100000)"
 fill="#000000" stroke="none">
@@ -84,16 +87,18 @@ fill="#000000" stroke="none">
 0 -40z"/>
 </g>
 </svg>   
-  </button>
+</button>
 )}
-        </Fragment>
-      )}
-   
-     
-<span className="inline-block   px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Posted on <Moment format='DD/MM/YYYY'>{date}</Moment></span>
+      </Fragment>
+    )}
+
+        <p class="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2">
+          posed on <Moment format='DD/MM/YYYY' >{date}</Moment> by {name}
+        </p>
+        </span>
+      </div>
     </div>
-  </div>
-</div>
+    
     );
 
     PostItem.defaultProps = {

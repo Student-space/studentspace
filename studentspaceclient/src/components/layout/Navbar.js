@@ -33,10 +33,12 @@ const  Navbar=({auth:{isAuthenticated,loading},userLogout}) =>{
         <span className="ml-3 text-xl">Student Space</span>
       </Link>
       <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
+      <Link to='/dashboard' className="mr-5 hover:text-gray-900">Dashboard</Link>
         <Link to='/community' className="mr-5 hover:text-gray-900">Commmunity</Link>
         <Link to='/teams' className="mr-5 hover:text-gray-900">Teams</Link>
+        <Link to='/library' className="mr-5 hover:text-gray-900">Library</Link>
         <Link to='/events' className="mr-5 hover:text-gray-900">Events</Link>
-        <Link to='/profile' className="mr-5 hover:text-gray-900">Profile</Link>
+        {/* <Link to='/profile' className="mr-5 hover:text-gray-900">Profile</Link> */}
       </nav>
       <Link to='/' onClick={userLogout} className="inline-flex items-center bg-white-200 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0">
         Logout
