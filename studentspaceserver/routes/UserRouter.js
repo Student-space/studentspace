@@ -27,8 +27,6 @@ router.get('/', auth, async (req, res) => {
 });
 
 /*
-  Author:Sahil Naik
-  Date:15/12/2020
   @desc Registration via email
   @router /users/signup
 */
@@ -94,8 +92,6 @@ async(req,res)=>{
 
 
 /*
-  Author:Sahil Naik
-  Date:15/11/2020
   @desc Router For signin
   @router users/signin
 */
