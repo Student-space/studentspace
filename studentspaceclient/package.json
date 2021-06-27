@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.6.0",
     "autoprefixer": "^10.1.0",
     "axios": "^0.21.0",
+    "file-saver": "^2.0.5",
     "moment": "^2.29.1",
     "postcss": "^8.2.1",
     "postcss-cli": "^8.3.1",

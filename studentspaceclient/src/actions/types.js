@@ -37,3 +37,10 @@ export const EVENT_ERROR='EVENT_ERROR';
 export const GET_EVENTS='GET_EVENTS';
 export const DELETE_EVENT='DELETE_EVENT';
 
+//library
+export const UPLOAD_SUCCESS = 'UPLOAD_SUCCESS';
+export const UPLOAD_FAIL='UPLOAD_FAIL';
+export const SEARCH_REQ='SEARCH_REQ';
+export const SEARCH_FAIL='SEARCH_FAIL';
+export const DOWNLOAD='DOWNLOAD';
+

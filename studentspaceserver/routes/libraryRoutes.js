@@ -3,21 +3,20 @@
 //importing packages
 const express=require('express');
 const router=express.Router();
+const auth = require('../middleware/auth');
 const mongoose=require(`mongoose`);
-const bodyParser=require(`body-parser`);
 const path=require(`path`);
 const multer = require('multer');
 const GridfsStorage =require('multer-gridfs-storage') ;
 const Grid =require('gridfs-stream') ;
 const methodOverride =require('method-override');
 
-//init express app
 
 
 //connect database
-const mongoURI=`mongodb+srv://db:db@cluster0.8ytql.mongodb.net/studentspace` 
-const connect=mongoose.createConnection(mongoURI,{ useNewUrlParser: true ,useUnifiedTopology: true,useCreateIndex: true ,useFindAndModify:false});
-
+const mongoURI=`mongodb+srv://db:db@cluster0.aaupd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority` 
+const connect=  mongoose.createConnection(mongoURI,{ useNewUrlParser: true ,useUnifiedTopology: true,useCreateIndex: true ,useFindAndModify:false});
+console.log("file server connected");
 
 
 
@@ -34,7 +33,7 @@ const storage = new GridfsStorage({
     url: mongoURI,
     file: (req, file) => {
       return new Promise((resolve, reject) => {
-          const filename = file.originalname + path.extname(file.originalname);
+          const filename = file.originalname;
           const fileInfo = {
             filename: filename,
             bucketName: 'uploads'
@@ -90,7 +89,7 @@ router.delete('/files/:id', (req, res) => {
 
 //@route GET /files
 //@desc get all files
-router.get('/files', (req, res) => {
+router.get('/files',(req, res) => {
     gfs.files.find().toArray((err, files) => {
       // Check if files
       if (!files || files.length === 0) {

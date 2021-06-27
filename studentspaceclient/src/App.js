@@ -22,7 +22,8 @@ import Alert from './components/layout/Alert';
 import PrivateRoute from './components/routing/PrivateRoute';
 import ProfileForm from './components/profile/Profileform';
 import Profile from './components/profile/Profile';
-// import library from './components/library/Library';
+import Library from './components/library/Home';
+import AddFile from './components/library/Addfile';
 import Community from './components/posts/Posts';
 import Post from './components/post/Post'
 import NotFound from './components/layout/NotFound';
@@ -83,6 +84,10 @@ const App=()=> {
           <PrivateRoute exact path ="/profile" component={Profile}/>
 
           <PrivateRoute exact path ="/community" component={Community}/>
+
+          <PrivateRoute exact path ="/library" component={Library}/>
+
+          <PrivateRoute exact path ="/addFile" component={AddFile}/>
 
           <PrivateRoute exact path ='/community/:id' component={Post}/>
 
